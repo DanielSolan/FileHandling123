@@ -1,35 +1,18 @@
-import java.io.FileReader;
-import java.io.IOException;
-
 class Main {
-    public static void simplestRead(){
-        try{
-            FileReader fr = new FileReader("input_File.txt");
-            int ascii = fr.read();
-            char letter = (char)ascii;
-            System.out.println(letter);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public static void simplestwholeFileRead(){
-        try{
-            FileReader fr = new FileReader("input_File.txt");
-            int ascii = 0;
-            while (ascii!=-1){
-                ascii = fr.read();
-                char letter = (char)ascii;
-                System.out.println(letter);
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
-        simplestRead();
+        //FileHandler.simplestRead("input_File.txt");
+        //FileHandler.simplestWholeFileRead("input_File.txt");
+        //FileHandler.betterWholeFileRead("input_File.txt");
+        //FileHandler.bestWholeFileRead("input_File.txt");
+
+        String[] peopleNames = new String[5];
+        int counter = 0;
+        while (FileHandler.stringRead("people_names.txt") != null){
+            peopleNames[counter] = FileHandler.stringRead("people_names.txt");
+            counter++;
+        }
+        for(int i = 0; i<peopleNames.length;i++ ){
+            System.out.println(peopleNames[i]);
+        }
     }
 }
