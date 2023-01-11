@@ -66,20 +66,28 @@ public class FileHandler {
         }
     }
 
-    public static String stringRead(String fileName){
+    public static String[] stringRead(String fileName){
+        String[] fileData = null;
+        int lineCount = 0;
         try{
             FileReader fr = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             while (line !=null){
-                System.out.println(line);
+                lineCount++;
                 line = br.readLine();
             }
-            return line;
+            fileData = new String[lineCount];
+            fr = new FileReader(fileName);
+            br = new BufferedReader(fr);
+            for(int i = 0;i<lineCount; i++){
+                line = br.readLine();
+                fileData[i]=line;
+            }
         }
         catch (IOException e){
             e.printStackTrace();
         }
-        return "hello";
+        return fileData;
     }
 }
