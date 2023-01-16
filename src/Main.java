@@ -44,6 +44,9 @@ class Main {
         Collections.addAll(peoples, fileLines);
         Collections.sort(peoples);
         System.out.println(peoples);
+
+        ArrayList<String> people = FileHandler.arrayListRead("peopleData.txt");
+        System.out.println(people);
         
         
 

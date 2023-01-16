@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FileHandler {
     public static void simplestRead(String fileName){
@@ -83,6 +84,31 @@ public class FileHandler {
             for(int i = 0;i<lineCount; i++){
                 line = br.readLine();
                 fileData[i]=line;
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return fileData;
+    }
+
+    public static ArrayList<String> arrayListRead(String fileName){
+        ArrayList<String> fileData = null;
+        int lineCount = 0;
+        try{
+            FileReader fr = new FileReader(fileName);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            while (line !=null){
+                lineCount++;
+                line = br.readLine();
+            }
+            fileData = new ArrayList<String>();
+            fr = new FileReader(fileName);
+            br = new BufferedReader(fr);
+            for(int i = 0;i<lineCount; i++){
+                line = br.readLine();
+                fileData.set(i, line);
             }
         }
         catch (IOException e){
