@@ -19,42 +19,6 @@ public class FileHandler {
         }
     }
 
-    public static void simplestWholeFileRead(String fileName){
-        try{
-            FileReader fr = new FileReader(fileName);
-            int ascii = 0;
-            while (ascii!=-1){
-                ascii = fr.read();
-                char letter = (char)ascii;
-                if (ascii!=-1){
-                    System.out.print(letter);
-                }
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    //Faster than simpler read, stores bytes in RAM instead of retrieving on an individual basis.
-    public static void betterWholeFileRead(String fileName){
-        try{
-            FileReader fr = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fr);
-            int ascii = 0;
-            while (ascii!=-1){
-                ascii = br.read();
-                char letter = (char)ascii;
-                if(ascii!=-1){
-                    System.out.print(letter);
-                }
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
     public static void bestWholeFileRead(String fileName){
         try{
             FileReader fr = new FileReader(fileName);
@@ -68,6 +32,24 @@ public class FileHandler {
         catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static String readFromFile(String fileName, int lineNumber){
+        String line = null;
+        try{
+            FileReader fr = new FileReader(fileName);
+            BufferedReader br = new BufferedReader(fr);
+            line = br.readLine();
+            int lineNum = lineNumber;
+            for (int i = 0; i<lineNum; i++){
+                line = br.readLine();
+            }
+            return line;
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return line;
     }
 
     public static String[] stringRead(String fileName){
@@ -114,17 +96,33 @@ public class FileHandler {
         return fileData;
     }
 
-  public static void writeToFile(String fileName, String text, boolean append) {
- // write text to fileName, overwriting (append = false) or appending (append = true)
-    try (
-     FileWriter fw = new FileWriter(fileName, append);
-     PrintWriter pw = new PrintWriter(fw)
-     ) {
-     pw.println(text);
-   }
-   catch (IOException e) {
-     e.printStackTrace();
-   }
- }
+    public static void writeToFile(String fileName, String text, boolean append) {
+    // write text to fileName, overwriting (append = false) or appending (append = true)
+        try (
+        FileWriter fw = new FileWriter(fileName, append);
+        PrintWriter pw = new PrintWriter(fw)
+        ) {
+        pw.println(text);
+        }
+        catch (IOException e) {
+        e.printStackTrace();
+        }
+     }
+
+     public static void compactFile(String fileName){
+         try{
+             FileReader fr = new FileReader(fileName);
+             BufferedReader br = new BufferedReader(fr);
+             String line = br.readLine();
+             line.replaceAll("\\s","");
+             while (line !=null){
+                 System.out.println(line);
+                 line = br.readLine();
+             }
+         }
+         catch (IOException e){
+             e.printStackTrace();
+         }
+     }
 
 }
