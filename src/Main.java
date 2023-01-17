@@ -36,17 +36,23 @@ class Main {
           String words[] = singleLine.split(" ");
           wordCount = wordCount + words.length;
         }
-
         System.out.println("Number of words in file: " + wordCount);
  
-        String[] fileLines = FileHandler.stringRead("peopleData.txt");
-        ArrayList<String> peoples = new ArrayList<String>();
-        Collections.addAll(peoples, fileLines);
-        Collections.sort(peoples);
-        System.out.println(peoples);
-
         ArrayList<String> people = FileHandler.arrayListRead("peopleData.txt");
+        Collections.sort(people);
         System.out.println(people);
+
+
+
+        System.out.println("Do you want to write?");
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("What is the file name?");
+        String fileName = userInput.nextLine();
+        //The scanner reads the string and stores it in username.
+        System.out.println("What is the writing?");
+        String writing = userInput.nextLine();
+        FileHandler.writeToFile(fileName, writing, true);
+      
         
         
 

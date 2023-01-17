@@ -2,6 +2,9 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 
 public class FileHandler {
     public static void simplestRead(String fileName){
@@ -93,22 +96,16 @@ public class FileHandler {
     }
 
     public static ArrayList<String> arrayListRead(String fileName){
-        ArrayList<String> fileData = null;
-        int lineCount = 0;
+        ArrayList<String> fileData = new ArrayList<String>();
         try{
             FileReader fr = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fr);
+            int counter = 0;
             String line = br.readLine();
-            while (line !=null){
-                lineCount++;
+            while(line != null){
+                fileData.add(line);
                 line = br.readLine();
-            }
-            fileData = new ArrayList<String>();
-            fr = new FileReader(fileName);
-            br = new BufferedReader(fr);
-            for(int i = 0;i<lineCount; i++){
-                line = br.readLine();
-                fileData.set(i, line);
+                counter++;
             }
         }
         catch (IOException e){
@@ -116,4 +113,18 @@ public class FileHandler {
         }
         return fileData;
     }
+
+  public static void writeToFile(String fileName, String text, boolean append) {
+ // write text to fileName, overwriting (append = false) or appending (append = true)
+    try (
+     FileWriter fw = new FileWriter(fileName, append);
+     PrintWriter pw = new PrintWriter(fw)
+     ) {
+     pw.println(text);
+   }
+   catch (IOException e) {
+     e.printStackTrace();
+   }
+ }
+
 }
