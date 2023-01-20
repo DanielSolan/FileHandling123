@@ -109,6 +109,19 @@ public class FileHandler {
         }
      }
 
+    public static void createFile(String fileName) {
+        // write text to fileName, overwriting (append = false) or appending (append = true)
+        try (
+                FileWriter fw = new FileWriter(fileName);
+                PrintWriter pw = new PrintWriter(fw)
+        ) {
+            pw.println("");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
      public static void compactFile(String fileName){
          try{
              FileReader fr = new FileReader(fileName);
