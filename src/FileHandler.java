@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 
 
 public class FileHandler {
@@ -50,6 +51,18 @@ public class FileHandler {
             e.printStackTrace();
         }
         return line;
+    }
+
+    // Read one character from the file at a given position
+    public static char randomRead(String fileName, int startPos){
+        try(RandomAccessFile rs = new RandomAccessFile(fileName, "rws")){
+            rs.seek(startPos);
+            char line = (char)rs.read();
+            return line;
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public static String[] stringRead(String fileName){

@@ -5,6 +5,15 @@ import java.util.Collections;
 
 class Main {
     public static void main(String[] args) {
+        System.out.println("Random File Access");
+        //Print chars 5-10 inclusive
+        int i = 0;
+        char letter = FileHandler.randomRead("data.txt", i);
+        while(letter != (char)-1){
+            System.out.println(letter);
+            i = i+2;
+            letter = FileHandler.randomRead("data.txt", i);
+        }
         System.out.println("Do you want to write?");
         Scanner userInput = new Scanner(System.in);
         System.out.println("What is the file name?");
@@ -13,6 +22,7 @@ class Main {
         System.out.println("What is the writing?");
         String writing = userInput.nextLine();
         FileHandler.writeToFile(fileName, writing, true);
+
       
         
         
